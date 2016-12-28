@@ -1,27 +1,10 @@
 package be.fnord.Permutator.PartitionedLists;
 
 import java.util.HashSet;
-import java.util.List;
 
-/**
- * @param <T>
- *            currently I think it's mainly only been tested with a String. I
- *            think that the main requirement of the template value is that it
- *            has a decent toString method (and perhaps a split?)
- * @author Evan Morrison edm92@uowmail.edu.au http://www.fnord.be Apache
- *         License, Version 2.0, Apache License Version 2.0, January 2004
- *         http://www.apache.org/licenses/
- */
+
 public class OrderConstrainedPartitionList<T> {
 
-	/*
-	 * Evans edits to a function from
-	 * http://www.vogella.de/articles/JavaAlgorithmsPartitionCollection
-	 * /article.html to generalize this you should paramaterize each of the
-	 * following two functions to be like the bottom two functions.
-	 * 
-	 * Change the type parameter in PartitionListItem (currently String).
-	 */
 
 	private static class Partition<T> extends PartitionListItem<T> {
 
@@ -71,8 +54,6 @@ public class OrderConstrainedPartitionList<T> {
 
 	public static boolean breaker = false;
 
-	// Creates the partition. By chopping each partition from the partition
-	// maker into subpartitions
 	private static <T> PartitionList<T> eparition(PartitionListElement<T> tail2) {
 		PartitionList<T> returner = new PartitionList<T>();
 		for (int i = 1; i <= tail2.size(); i++) {
@@ -208,8 +189,6 @@ public class OrderConstrainedPartitionList<T> {
 		return finalResults; // returnResults;
 	}
 
-	// Function removes all the duplicate entries after generating all possible
-	// combos.
 	public static <T> PartitionList<T> makePartitions(
 			PartitionListElement<T> list) {
 		T newElement = null;
@@ -286,29 +265,6 @@ public class OrderConstrainedPartitionList<T> {
 		return retSwitches;
 	}
 
-	/**
-	 * Returns consecutive {@linkplain List#subList(int, int) sublists} of a
-	 * list, each of the same size (the final list may be smaller). For example,
-	 * partitioning a list containing {@code [a, b, c, d, e]} with a partition
-	 * size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer list containing
-	 * two inner lists of three and two elements, all in the original order.
-	 * <p/>
-	 * <p>
-	 * The outer list is unmodifiable, but reflects the latest state of the
-	 * source list. The inner lists are sublist views of the original list,
-	 * produced on demand using {@link List#subList(int, int)}, and are subject
-	 * to all the usual caveats about modification as explained in that API.
-	 * <p/>
-	 * * Adapted from http://code.google.com/p/google-collections/
-	 *
-	 * @param list
-	 *            the list to return consecutive sublists of
-	 * @param size
-	 *            the desired size of each sublist (the last may be smaller)
-	 * @return a list of consecutive sublists
-	 * @throws IllegalArgumentException
-	 *             if {@code partitionSize} is nonpositive
-	 */
 
 	public static <T> PartitionListItem<T> partition(
 			PartitionListElement<T> list, int size) {

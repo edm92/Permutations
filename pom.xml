@@ -2,10 +2,25 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>be.fnord</groupId>
   <artifactId>Permutator</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Permutator</name>
   <url>http://fnord.be</url>
+  <description>A permutation library and order constrained list permutation library. </description>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+   <scm>
+        <connection>scm:git:git@github.com:edm92/Permutations.git</connection>
+        <developerConnection>scm:git:git@github.com:edm92/Permutations.git</developerConnection>
+        <url>git@github.com:edm92/Permutations.git</url>
+      <tag>HEAD</tag>
+  </scm>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
@@ -48,9 +63,9 @@
               <argument>-Xms1024M</argument>
               <argument>-Xmx1024M</argument>
               <argument>-cp</argument>
-              <classpath/>
+              <classpath />
               <argument>be.fnord.Permutator.Sample</argument>
-              <argument/>
+              <argument />
             </arguments>
           </configuration>
         </plugin>
@@ -67,6 +82,18 @@
             </archive>
           </configuration>
         </plugin>
+
+        <plugin>
+  <groupId>org.sonatype.plugins</groupId>
+  <artifactId>nexus-staging-maven-plugin</artifactId>
+  <version>1.6.7</version>
+  <extensions>true</extensions>
+  <configuration>
+     <serverId>ossrh</serverId>
+     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+  </configuration>
+</plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -96,4 +123,16 @@
       <version>${cucumber.version}</version>
     </dependency>
   </dependencies>
+  
+  <distributionManagement>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+ <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository>
+</distributionManagement>
+
 </project>
