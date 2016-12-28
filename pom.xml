@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>be.fnord</groupId>
   <artifactId>Permutator</artifactId>
-  <version>1.0.6-SNAPSHOT</version>
+  <version>1.0.8-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Permutator</name>
   <url>http://fnord.be</url>
@@ -164,6 +164,8 @@
       <version>${cucumber.version}</version>
     </dependency>
   </dependencies>
+  
+
   
   <distributionManagement>
   <snapshotRepository>
