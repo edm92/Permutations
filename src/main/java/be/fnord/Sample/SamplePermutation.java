@@ -1,13 +1,16 @@
-package be.fnord.Permutator;
+package be.fnord.Sample;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.LinkedList;
 
-import be.fnord.Permutator.PartitionedLists.OrderConstrainedPartitionList;
-import be.fnord.Permutator.PartitionedLists.PartitionList;
-import be.fnord.Permutator.PartitionedLists.PartitionListElement;
-import be.fnord.Permutator.PartitionedLists.PartitionListItem;
+import be.fnord.Combinations.CombinationGenerator;
+import be.fnord.PartitionedLists.OrderConstrainedPartitionList;
+import be.fnord.PartitionedLists.PartitionList;
+import be.fnord.PartitionedLists.PartitionListElement;
+import be.fnord.PartitionedLists.PartitionListItem;
+import be.fnord.Permutations.PermutationController;
+import be.fnord.Permutations.PermutationGenerator;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -15,7 +18,7 @@ import cucumber.api.java.en.When;
  * Example 
  *
  */
-public class Sample 
+public class SamplePermutation 
 {
 	public static boolean TESTMODE = true;
 	public static int countedPerms = 0;
@@ -23,12 +26,21 @@ public class Sample
     public static void main( String[] args )
     {
     	TESTMODE = false;
-    	runPermutationExample("evan");
-    	checkResult("24");
-    	runOrderedListExample("20");
+//    	runArrayPermutationExample("evan");
+//    	runPermutationExample("evan");
+//    	checkResult("24");
+    	
+    	PermutationGenerator cr = new PermutationGenerator(4);
+    	
+		while(cr.hasMore()){
+			int [] i = cr.getNext();
+			for(int ii = 0 ; ii < i.length ; ii++)
+				System.out.print(i[ii] + " ");
+			System.out.println("");
+		}
 
     }
-    @When("^I merge two lists I should get \"([^\"]*)\"$")
+	@When("^I merge two lists I should get \"([^\"]*)\"$")
 	public static void runOrderedListExample(String _compareTo) {
 		try{
 			int compareTo = Integer.parseInt(_compareTo);
@@ -157,10 +169,10 @@ public class Sample
 			for(char c : word.toCharArray())
 				perms.add("" + c);
 			System.out.println("Perms = " + perms);
-			Permutator<String> p = new Permutator<String>();
+			PermutationController<String> p = new PermutationController<String>();
 			p.permutation(perms);
 			while(p.hasNext()){
-				System.out.println(p.getNext().toString());
+				System.out.println(p.getNextListItem().toString());
 				countedPerms++;
 			}
 			
@@ -178,4 +190,36 @@ public class Sample
 				e.printStackTrace();
 		}
 	}
+	
+    public static void runArrayPermutationExample(String input) {
+    	System.out.println("Running permutator");
+    	Character [] letters2 = toCharacterArray(input);
+    	PermutationController<Character> p = new PermutationController<Character>();
+		p.permutation(Character.class, letters2, '~');
+		while(p.hasNext()){
+			System.out.print("Got new one " );
+			Character [] res = p.getNextArrayItem();
+			for(int i = 0 ; i < res.length ; i++)
+				System.out.print(res[i]);
+			System.out.println("");
+		}
+		
+	}
+    
+    public static Character[] toCharacterArray( String s ) {
+
+    	   if ( s == null ) {
+    	     return null;
+    	   }
+
+    	   int len = s.length();
+    	   Character[] array = new Character[len];
+    	   for (int i = 0; i < len ; i++) {
+    	      array[i] = new Character(s.charAt(i));
+    	   }
+
+    	   return array;
+    	}
+
+
 }

@@ -1,4 +1,4 @@
-package be.fnord.Permutator.PartitionedLists;
+package be.fnord.PartitionedLists;
 
 import java.util.HashSet;
 

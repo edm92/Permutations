@@ -1,0 +1,201 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>be.fnord</groupId>
+  <artifactId>Permutator</artifactId>
+  <version>1.0.8-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Permutator</name>
+  <url>http://fnord.be</url>
+  <description>A permutation library and order constrained list permutation library. </description>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>edm92</id>
+      <name>Evan Morrison</name>
+      <email>evan@fnord.be</email>
+      <url>http://www.fnord.be</url>
+      <organization>Fnord</organization>
+      <organizationUrl>http://www.fnord.be</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>Australia/Sydney</timezone>
+    </developer>
+  </developers>
+   <scm>
+        <connection>scm:git:git@github.com:edm92/Permutations.git</connection>
+        <developerConnection>scm:git:git@github.com:edm92/Permutations.git</developerConnection>
+        <url>git@github.com:edm92/Permutations.git</url>
+      <tag>HEAD</tag>
+  </scm>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <junit.version>4.12</junit.version>
+    <cucumber.version>1.2.4</cucumber.version>
+    <maven.compiler.version>3.3</maven.compiler.version>
+  </properties>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.version}</version>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <compilerArgument>-Werror</compilerArgument>
+          </configuration>
+        </plugin>
+   <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>2.2.1</version>
+      <executions>
+        <execution>
+          <id>attach-sources</id>
+          <goals>
+            <goal>jar-no-fork</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>  
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>2.9.1</version>
+      <configuration>
+         <includeDependencySources>true</includeDependencySources>
+         <dependencySourceIncludes>
+             <dependencySourceInclude>be.fnord:Permutator</dependencySourceInclude>
+         </dependencySourceIncludes>
+     </configuration>
+      <executions>
+        <execution>
+          <id>attach-javadocs</id>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>     
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <configuration>
+            <additionalBuildcommands>
+              <buildcommand>org.drools.eclipse.droolsbuilder</buildcommand>
+            </additionalBuildcommands>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <configuration>
+            <executable>java</executable>
+            <!-- only waltz12 is configured at the moment -->
+            <!-- TODO waltz50, manners64 and manners128 -->
+            <arguments>
+              <argument>-Xms1024M</argument>
+              <argument>-Xmx1024M</argument>
+              <argument>-cp</argument>
+              <classpath />
+              <argument>be.fnord.Permutator.Sample</argument>
+              <argument />
+            </arguments>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+            <archive>
+              <manifest>
+                <mainClass>be.fnord.Permutator.Sample</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
+
+        <plugin>
+  <groupId>org.sonatype.plugins</groupId>
+  <artifactId>nexus-staging-maven-plugin</artifactId>
+  <version>1.6.7</version>
+  <extensions>true</extensions>
+  <configuration>
+     <serverId>ossrh</serverId>
+     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+  </configuration>
+</plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <dependencies>
+    <!-- Test Scope <dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>${junit.version}</version><scope>test</scope></dependency>-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <!-- <version>3.8.1</version>-->
+    </dependency>
+    <!-- TDD Cucumber -->
+    <!-- Test Scope            <dependency><groupId>info.cukes</groupId><artifactId>cucumber-java</artifactId><version>${cucumber.version}</version><scope>test</scope></dependency><dependency><groupId>info.cukes</groupId><artifactId>cucumber-core</artifactId><version>${cucumber.version}</version><scope>test</scope></dependency><dependency><groupId>info.cukes</groupId><artifactId>cucumber-junit</artifactId><version>${cucumber.version}</version><scope>test</scope></dependency>-->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>${cucumber.version}</version>
+    </dependency>
+  </dependencies>
+  
+
+  
+  <distributionManagement>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+ <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository>
+</distributionManagement>
+
+</project>
