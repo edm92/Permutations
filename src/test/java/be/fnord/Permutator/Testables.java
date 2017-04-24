@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 
 public class Testables {
 
+/*
 	@Test
 	public void testCombinator(){
 		CombinationGenerator cr = new CombinationGenerator(15,7);
@@ -18,7 +19,7 @@ public class Testables {
 			System.out.println("");
 		}
 	}
-
+*/
 
     @When("^I run a permutation over \"([^\"]*)\"$")
     public void i_run_a_permutation_over(String arg1) throws Throwable {
