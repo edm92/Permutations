@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import cucumber.api.junit.Cucumber;
 
 import org.junit.AfterClass;
@@ -20,10 +22,10 @@ features = {"features"}
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
     extends TestCase
 {
-	
+
 
 	 @BeforeClass
 	    public static void doYourOneTimeSetup() {
@@ -32,14 +34,14 @@ public class AppTest
 	  @AfterClass
 	    public static void doYourOneTimeTeardown() throws InterruptedException {
 
-	    }   
+	    }
 
 	  public static void init(){
 		  // Nothing
 	  }
-	  
+
 	public static boolean stillRunning = true;
-	
+
     /**
      * Create the test case
      *
@@ -65,5 +67,6 @@ public class AppTest
     {
         assertTrue( true );
     }
-    
+
+
 }
